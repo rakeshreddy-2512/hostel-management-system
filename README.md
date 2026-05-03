@@ -1,77 +1,134 @@
-# Hostel Management System
+# Hospital Management System
 
-A simple Flask-based Hostel Management System with:
+A production-style full-stack **Hospital Management System** built with **React + Tailwind CSS** (frontend) and **Node.js + Express + MongoDB** (backend).
 
-- **Room allocation** for students
-- **Fee tracking** (due/paid and status)
-- **Complaint management** with resolve workflow
-- **Admin dashboard** with summary metrics
+## Core Features
+
+- **Authentication & Authorization**
+  - JWT-based login/register
+  - Role-aware access (`admin`, `doctor`, `staff`)
+- **Patient Records Management**
+  - Create, read, update, delete patient profiles
+  - Medical history and emergency details
+- **Appointment Management**
+  - Schedule and update appointments
+  - Status tracking (`scheduled`, `completed`, `cancelled`)
+- **Doctor Dashboard**
+  - Upcoming appointments view
+  - Completed-appointment metrics
+- **Billing Management**
+  - Bill creation and tracking
+  - Payment status (`pending`, `partial`, `paid`)
+
+---
 
 ## Tech Stack
 
-- Python 3
-- Flask
-- SQLite
-- HTML/CSS templates
+### Frontend
+- React (Vite)
+- Tailwind CSS
+- React Router
+- Axios
 
-## Features
+### Backend
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- JWT + bcryptjs
+- CORS + Morgan
 
-### 1) Room Allocation
-- Add hostel rooms with capacity.
-- Allocate students to available rooms only.
-- Occupancy is updated automatically.
-
-### 2) Fee Tracking
-- Add fee records per student.
-- Track amount due, amount paid, due date, and payment status.
-
-### 3) Complaints
-- Submit complaints linked to students.
-- View all complaints.
-- Mark open complaints as resolved.
-
-### 4) Admin Dashboard
-- Total students
-- Total rooms
-- Vacant rooms
-- Pending fee records
-- Open complaints
-- Recent complaints table
-
-## Setup
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-## Run
-
-```bash
-python app.py
-```
-
-Then open: `http://127.0.0.1:5000`
+---
 
 ## Project Structure
 
-```text
+```
 .
-├── app.py
-├── requirements.txt
-├── static/
-│   └── styles.css
-└── templates/
-    ├── base.html
-    ├── dashboard.html
-    ├── rooms.html
-    ├── students.html
-    ├── fees.html
-    └── complaints.html
+├── client/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   └── services/
+│   └── package.json
+├── server/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── .env.example
+│   └── index.js
+└── README.md
 ```
 
-## Notes
+---
 
-- Database file `hostel.db` is auto-created on first run.
-- Change `app.secret_key` in `app.py` for production use.
+## Setup Instructions
+
+### 1) Backend Setup
+
+```bash
+cd server
+npm install
+cp .env.example .env
+npm run dev
+```
+
+Backend runs by default on `http://localhost:5000`.
+
+### 2) Frontend Setup
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+Frontend runs by default on `http://localhost:5173`.
+
+Set optional frontend API URL in `client/.env`:
+
+```bash
+VITE_API_URL=http://localhost:5000/api
+```
+
+---
+
+## API Endpoints (Summary)
+
+### Auth
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+
+### Patients
+- `GET /api/patients`
+- `POST /api/patients`
+- `PUT /api/patients/:id`
+- `DELETE /api/patients/:id`
+
+### Appointments
+- `GET /api/appointments`
+- `POST /api/appointments`
+- `PUT /api/appointments/:id`
+- `GET /api/appointments/doctor/dashboard`
+
+### Billing
+- `GET /api/billing`
+- `POST /api/billing`
+- `PUT /api/billing/:id`
+
+---
+
+## Roadmap
+
+- Advanced analytics and reporting
+- Prescription and pharmacy module
+- In-patient bed/ward management
+- File uploads for diagnostic reports
+- Email/SMS reminders for appointments
+
+---
+
+## License
+
+This project is available under the MIT License.
