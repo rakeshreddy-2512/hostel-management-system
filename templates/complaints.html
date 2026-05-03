@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Complaints</h2>
+<form method="post">
+  <select name="student_id" required><option value="">Select Student</option>{% for s in students %}<option value="{{ s.id }}">{{ s.name }}</option>{% endfor %}</select>
+  <input name="subject" placeholder="Subject" required>
+  <textarea name="description" placeholder="Complaint details" required></textarea>
+  <button>Submit Complaint</button>
+</form>
+<table><tr><th>ID</th><th>Student</th><th>Subject</th><th>Description</th><th>Status</th><th>Action</th></tr>
+{% for c in complaints %}<tr><td>{{ c.id }}</td><td>{{ c.name }}</td><td>{{ c.subject }}</td><td>{{ c.description }}</td><td>{{ c.status }}</td><td>{% if c.status == 'Open' %}<form method="post" action="{{ url_for('resolve_complaint', complaint_id=c.id) }}"><button>Resolve</button></form>{% endif %}</td></tr>{% endfor %}
+</table>
+{% endblock %}

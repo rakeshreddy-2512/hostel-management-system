@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<div class="cards">
+  <div class="card"><strong>{{ metrics.students }}</strong><span>Students</span></div>
+  <div class="card"><strong>{{ metrics.rooms }}</strong><span>Total Rooms</span></div>
+  <div class="card"><strong>{{ metrics.vacant_rooms }}</strong><span>Vacant Rooms</span></div>
+  <div class="card"><strong>{{ metrics.pending_fees }}</strong><span>Pending Fee Records</span></div>
+  <div class="card"><strong>{{ metrics.open_complaints }}</strong><span>Open Complaints</span></div>
+</div>
+<h3>Recent Complaints</h3>
+<table><tr><th>ID</th><th>Student</th><th>Subject</th><th>Status</th><th>Date</th></tr>
+{% for c in complaints %}<tr><td>{{ c.id }}</td><td>{{ c.name }}</td><td>{{ c.subject }}</td><td>{{ c.status }}</td><td>{{ c.created_at }}</td></tr>{% endfor %}
+</table>
+{% endblock %}

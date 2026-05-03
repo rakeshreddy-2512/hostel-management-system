@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Fee Tracking</h2>
+<form method="post">
+  <select name="student_id" required><option value="">Select Student</option>{% for s in students %}<option value="{{ s.id }}">{{ s.name }}</option>{% endfor %}</select>
+  <input name="amount_due" type="number" step="0.01" placeholder="Amount Due" required>
+  <input name="amount_paid" type="number" step="0.01" placeholder="Amount Paid">
+  <input name="due_date" type="date">
+  <button>Add Fee</button>
+</form>
+<table><tr><th>Student</th><th>Due</th><th>Paid</th><th>Due Date</th><th>Status</th></tr>
+{% for f in fees %}<tr><td>{{ f.name }}</td><td>{{ f.amount_due }}</td><td>{{ f.amount_paid }}</td><td>{{ f.due_date or '-' }}</td><td>{{ f.status }}</td></tr>{% endfor %}
+</table>
+{% endblock %}
