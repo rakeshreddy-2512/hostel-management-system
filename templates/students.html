@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Room Allocation</h2>
+<form method="post">
+  <input name="name" placeholder="Student Name" required>
+  <input name="email" type="email" placeholder="Email" required>
+  <input name="course" placeholder="Course">
+  <select name="room_id" required>
+    <option value="">Select Room</option>
+    {% for r in rooms %}<option value="{{ r.id }}">{{ r.room_number }} ({{ r.occupied }}/{{ r.capacity }})</option>{% endfor %}
+  </select>
+  <button>Allocate</button>
+</form>
+<table><tr><th>Name</th><th>Email</th><th>Course</th><th>Room</th><th>Check In</th></tr>
+{% for s in students %}<tr><td>{{ s.name }}</td><td>{{ s.email }}</td><td>{{ s.course }}</td><td>{{ s.room_number or '-' }}</td><td>{{ s.check_in_date }}</td></tr>{% endfor %}
+</table>
+{% endblock %}

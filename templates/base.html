@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hostel Management System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <header>
+    <h1>Hostel Management System</h1>
+    <nav>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('rooms') }}">Rooms</a>
+      <a href="{{ url_for('students') }}">Allocation</a>
+      <a href="{{ url_for('fees') }}">Fees</a>
+      <a href="{{ url_for('complaints') }}">Complaints</a>
+    </nav>
+  </header>
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">{% for message in messages %}<li>{{ message }}</li>{% endfor %}</ul>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
